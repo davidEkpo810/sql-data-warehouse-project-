@@ -16,24 +16,10 @@ WARNING:
 DROP DATABASE IF EXISTS Datawarehouse;
 CREATE DATABASE Datawarehouse CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-/*
-=========================================================================================================================================
 ## Data Import Script for `bronze_crm_cust_info` Table
 This script truncates the `bronze_crm_cust_info` table and loads data from a CSV file located at `/private/tmp/cust_info.csv`.
 
-### Key Features:
-* **Data Cleaning**: The script trims and nullifies empty strings for `cst_id` and `cst_create_date` columns.
-* **Date Validation**: The script validates the `cst_create_date` column to ensure it conforms to the `YYYY-MM-DD` format. Invalid dates are set to `NULL`.
-* **CSV Import**: The script uses MySQL's `LOAD DATA INFILE` statement to import data from the CSV file, handling fields terminated by commas, optionally enclosed by double quotes, and lines terminated by newline characters.
-
-### Purpose:
-This script is designed to import customer information data from a CSV file into the `bronze_crm_cust_info` table, ensuring data consistency and validity.
-
-### Notes:
-* Make sure to update the file path `/private/tmp/cust_info.csv` to match the actual location of your CSV file.
-* The script assumes that the CSV file has the same column structure as the `bronze_crm_cust_info` table.
-=========================================================================================================================================
-/*    
+    
 
 TRUNCATE TABLE bronze_crm_cust_info;
 
