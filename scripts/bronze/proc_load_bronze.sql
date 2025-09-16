@@ -130,12 +130,3 @@ TRUNCATE TABLE bronze_px_cat_giv2;
   cat = IFNULL(TRIM(@cat), ''),
   subcat = IFNULL(TRIM(@subcat), ''),
   maintenance = IFNULL(TRIM(@maintenance), '')
- 
- 
- 
- LOAD DATA INFILE
- INTO TABLE
- FIELDS TERMINATED BY
- OPTIONALLY ENCLOSED BY
- LINES TERMINATED BY
- IGNORE 1 ROWS 
