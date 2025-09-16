@@ -34,6 +34,7 @@ This script is designed to import customer information data from a CSV file into
 * The script assumes that the CSV file has the same column structure as the `bronze_crm_cust_info` table.
 =========================================================================================================================================
 /*    
+
 TRUNCATE TABLE bronze_crm_cust_info;
 
 LOAD DATA INFILE '/private/tmp/cust_info.csv'
