@@ -1,3 +1,24 @@
+/*
+========================================================================================
+DDL Script: Create Bronze Tables
+========================================================================================
+Key Features:
+    Data Cleaning: 
+        The script trims and nullifies empty strings for columns.
+    Date Validation: 
+        The script validates the `cst_create_date` column to ensure it conforms to the 
+        `YYYY-MM-DD` format. Invalid dates are set to `NULL`.
+    CSV Import: 
+        The script uses MySQL's `LOAD DATA INFILE` statement to import data from the 
+        CSV file, handling fields terminated by commas, optionally enclosed by double 
+        quotes, and lines terminated by newline characters.
+========================================================================================
+Script Purpose:
+    This table creates tables in the 'Bronze' schema, Truncating before loading data 
+    prevent duplicate values.
+========================================================================================
+*/
+
 TRUNCATE TABLE bronze_crm_cust_info;
 
 LOAD DATA INFILE '/private/tmp/cust_info.csv'
@@ -16,7 +37,6 @@ SET
             THEN TRIM(@cst_create_date)
         ELSE NULL
     END;
-
 
 TRUNCATE TABLE bronze_crm_prd_info;
 
@@ -69,3 +89,53 @@ SET
  sls_sales    = NULLIF(TRIM(@sls_sales), ''),
  sls_quantity = NULLIF(TRIM(@sls_quantity), ''),
  sls_price    = NULLIF(TRIM(REPLACE(REPLACE(REPLACE(@sls_price, ' ', ''), '\r', ''), '\t', '')), '');
+
+TRUNCATE TABLE bronze_erp_cust_az12;
+
+LOAD DATA INFILE '/private/tmp/CUST_AZ12.csv'
+INTO TABLE bronze_erp_cust_az12
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(@civ, @bdate, @gen)
+SET
+ civ =  IFNULL(TRIM(@civ), ''),
+ bdate = IFNULL(TRIM(@bdate), ''),
+ gen = IFNULL(TRIM(@gen), '');
+
+
+LOAD DATA INFILE '/private/tmp/LOC_A101.csv'
+INTO TABLE bronze_erp_loc_a101
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(@cid, @cntry)
+SET
+ cid = IFNULL(TRIM(@cid), ''),
+ cntry = IFNULL(TRIM(@cntry), '');
+   
+TRUNCATE TABLE bronze_px_cat_giv2;
+
+ LOAD DATA INFILE '/private/tmp/PX_CAT_G1V2.csv'
+ INTO TABLE bronze_px_cat_giv2
+ FIELDS TERMINATED BY ','
+ OPTIONALLY ENCLOSED BY '"'
+ LINES TERMINATED BY '\n'
+ IGNORE 1 ROWS
+ (@id, @cat, @subcat, @maintenance)
+ SET
+  id = IFNULL(TRIM(@id), ''),
+  cat = IFNULL(TRIM(@cat), ''),
+  subcat = IFNULL(TRIM(@subcat), ''),
+  maintenance = IFNULL(TRIM(@maintenance), '')
+ 
+ 
+ 
+ LOAD DATA INFILE
+ INTO TABLE
+ FIELDS TERMINATED BY
+ OPTIONALLY ENCLOSED BY
+ LINES TERMINATED BY
+ IGNORE 1 ROWS 
