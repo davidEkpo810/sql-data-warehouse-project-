@@ -40,9 +40,14 @@ Develop a modern data warehouse using MySQL to consolidate sales data, enabling 
 # 📊 Data Model Requirements
 - Single, user-friendly data model
 - Designed for analytical queries
+---
+
+# 🛡️ License
+This project is licensed under the MIT License. You are free to use, modify, and share this project with proper attribution.
+
 
 ---
-# About Me
+# ⭐️ About Me
 Hi there! I am **David Ekpo**, a **Data Analyst** with a passion for turning data into actionable insights. I'm skilled in data analysis, visualization, and modeling, with a strong foundation in SQL, R, and data visualization tools.
 
 
